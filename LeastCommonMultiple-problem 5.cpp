@@ -55,6 +55,7 @@ std::vector<int> primeVec(int limit)
 
 }
 
+//gets prime factors of a number into a vector
 std::vector<int> primeFactors(int inputNum_)
 {
 	int inputNum = inputNum_;
@@ -64,8 +65,9 @@ std::vector<int> primeFactors(int inputNum_)
 		for (int i = 0; i < primeVec(factorLimit).size(); i++)
 		{
 			divisible = true;
-
-			while (divisible == true) {
+			//as long as the number is divisible the loop will continue
+			while (divisible == true) 
+			{
 				if (inputNum % primeVec(factorLimit)[i] == 0)
 				{
 					inputNum /= primeVec(factorLimit)[i];
@@ -87,6 +89,7 @@ std::vector<int> primeFactors(int inputNum_)
 
 }
 
+//function for getting the unique prime factors for a number, not the amount of times they occur. 
 std::vector<int> uniquePrimeFactors(int num) {
 
 	std::vector<int>A =primeFactors(num);
@@ -105,18 +108,21 @@ int LeastCommonMultiple(int limit)
 	int finalOut = 1;
 	std::vector<int> outputVector;
 	
-	
+	//the main loop, from 2 to the limit
 	for (int p = 2; p <= limit; p++)
 	{
+
+		//gets the primefactors for the current number into a vector
 		std::vector<int> primeFactorVec1 = primeFactors(p);
 		indexNum = p;
 		
 		for (int i = 0; i < uniquePrimeFactors(indexNum).size(); i++)
 		{
 			
-			
+			//checks the number of times that the unique factor that the loop runs through occurs in the input vector, which is the primeFactorVec1, and the amount of times the factor occurs in the outputVector
 				countIn = std::count(primeFactorVec1.begin(), primeFactorVec1.end(), uniquePrimeFactors(indexNum)[i]);
 				countOut = std::count(outputVector.begin(), outputVector.end(), uniquePrimeFactors(indexNum)[i]);
+			//if the countIn is larger it adds the factor so that the out matches the in. 
 				if (countIn > countOut)
 				{
 					int countDiff = countIn - countOut;
@@ -132,7 +138,7 @@ int LeastCommonMultiple(int limit)
 
 		}
 	}
-
+	//multiplies the factors together to get the finalnumber in finalform and not as factors. 
 	for (int c = 0; c < outputVector.size(); c++)
 	{
 		
